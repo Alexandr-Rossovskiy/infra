@@ -7,7 +7,7 @@ resource "google_compute_instance" "app" {
 	name = "example-instance-${count.index+1}"
 	machine_type = "e2-small"
 	zone = "europe-north1-a"
-	count = 1
+	count = 3
 	
 	#загрузочный диск
 	boot_disk {
@@ -29,4 +29,22 @@ resource "google_compute_instance" "app" {
 
 	tags = ["reddit-app"]
 
+}
+
+#настройки firewall
+resource "google_compute_firewall" "firewall_app" {
+	name = "firewall-1"
+	network = "default"
+    
+    #что разрешаем
+	allow {
+	protocol = "tcp"
+	ports = ["80", "443", "53", ]
+	}
+    
+    #каким адресам разрешаем доступ
+	source_ranges = ["0.0.0.0/0"]
+
+    #правило пременимо для инстансов с тегом:
+	target_tags = ["reddit-app"]
 }
