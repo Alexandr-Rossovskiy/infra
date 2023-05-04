@@ -1,0 +1,12 @@
+---
+- name: Install Apache                                  #имя Playbook
+  hosts: all                                            #группа хостов
+  become: yes                                           #права root
+
+  tasks:               
+  - name: Install Apache server                         #имя первого задания
+    apt: name=apache2 state=latest                      #команда первого задания
+
+  - name: Start Apache                                  
+    service: name=apache2 state=started enabled=yes     
+

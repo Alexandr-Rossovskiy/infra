@@ -1,0 +1,6 @@
+[staging_servers]
+instance-1 ansible_host=34.88.57.61 ansible_user=appuser ansible_ssh_private_key_file=/home/alexross/.ssh/appuser
+
+[prod_servers]
+instance-2 ansible_host=34.88.217.146
+instance-3 ansible_host=35.228.81.253
