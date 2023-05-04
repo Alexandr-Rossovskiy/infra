@@ -1,0 +1,16 @@
+---
+# tasks file for deploy_apache_web
+
+- name: Install Apache server
+  apt: name=apache2 state=latest 
+
+- name: Copy Web page
+  template: src=index.html dest={{ destin_folder }}/index.html mode=0555
+  notify: Restart Apache
+
+- name: Copy script
+  copy: src=script.js dest={{ destin_folder }} mode=0555
+  notify: Restart Apache
+
+- name: Start Apache and enabled
+  service: name=apache2 state=started enabled=yes
